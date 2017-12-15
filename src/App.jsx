@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +36,7 @@ class App extends React.Component {
   }
 
   render() {
+
     let ampm = 'AM';
     let hours = this.state.hours;
     let minutes = this.state.minutes;
@@ -52,6 +54,7 @@ class App extends React.Component {
       ampm = 'PM';
       hours = this.state.hours - 12;
     }
+
     return (
       <div id='clock'>  { 'Time is: ' + hours + ':' + minutes + ':' + seconds + ' ' + ampm }
       </div>

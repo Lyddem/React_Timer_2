@@ -18324,61 +18324,54 @@ var App = function (_React$Component) {
       hours: hours,
       minutes: minutes,
       seconds: seconds
-      // this.incrementTime = this.incrementTime.bind(this);
-      // setInterval(this.incrementTime, 1000);
-    };return _this;
+    };
+
+    _this.incrementTime = _this.incrementTime.bind(_this);
+    setInterval(_this.incrementTime, 1000);
+    return _this;
   }
 
   _createClass(App, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      setInterval(this.incrementTime.bind(this), 1000);
-    }
-  }, {
     key: 'incrementTime',
     value: function incrementTime() {
-      //increment seconds
       if (this.state.seconds < 59) {
         this.setState({ seconds: ++this.state.seconds });
       }
-
-      //increment minutes when seconds = 59, reset seconds to 0
+      //if seconds = 59, increment minutes, set seconds to 00
       if (this.state.seconds === 59) {
-        this.setState({ minutes: ++this.state.minutes });
-        this.setState({ seconds: 0 });
+        this.setState({ minutes: ++this.state.minutes, seconds: 0 });
       }
-      console.log('working');
-      //increment hour when minutes = 59
+
+      //if minutes = 59, increment hours, set minutes to 0
       if (this.state.minutes === 59) {
-        this.setState({ hours: ++this.state.hours });
+        this.setState({ hours: ++this.state.hours, minutes: 0 });
       }
     }
   }, {
     key: 'render',
     value: function render() {
+      var ampm = 'AM';
       var hours = this.state.hours;
       var minutes = this.state.minutes;
       var seconds = this.state.seconds;
-      var ampm = 'AM';
 
-      if (this.state.seconds < 10) {
-        seconds = '0' + this.state.seconds;
-      }
-
-      if (this.state.minutes < 10) {
+      if (minutes < 10) {
         minutes = '0' + this.state.minutes;
       }
 
-      if (this.state.hours > 12) {
-        hours = this.state.hours - 12;
-        ampm = 'PM';
+      if (seconds < 10) {
+        seconds = '0' + this.state.minutes;
       }
 
+      if (this.state.hours > 12) {
+        ampm = 'PM';
+        hours = this.state.hours - 12;
+      }
       return _react2.default.createElement(
         'div',
         { id: 'clock' },
-        'Time is: ',
-        hours + ':' + minutes + ':' + seconds + ' ' + ampm
+        '  ',
+        'Time is: ' + hours + ':' + minutes + ':' + seconds + ' ' + ampm
       );
     }
   }]);
